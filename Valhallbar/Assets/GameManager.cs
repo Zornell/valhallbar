@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
 	public GameObject BloodExplosion;
+    public AudioSource AudioSource;
 
 	public TextAsset LevelData;
 
-    [Range(-2f, 3f)] public float SpawnHeightOffset = 1.5f;
+    private float SpawnHeightOffset = 1.8f;
 
     public int Lanes = 5;
     public int LaneOffset = 2;
@@ -44,58 +46,73 @@ public class GameManager : MonoBehaviour
 			newObj.lane = -(Lanes/2) + lane;
 			newObj.laneOffset = LaneOffset;
 			newObj.height = -time / 1000f * Speed + SpawnHeightOffset;
+		    newObj.time = time;
             
 			_enemies.Add (newObj);
 		}
+
+        foreach (var grouping in _enemies.ToLookup(e => e.time).Where(grp => grp.Count() > 1).SelectMany(x => x))
+        {
+            grouping.height += 0.5f;
+        }
 	}
-	
-	void Update ()
+
+    void Update()
     {
         MovePlayer();
-        
+
         var attackTriggered = Input.GetKeyDown(KeyCode.Space);
-        bool spinTriggered = Input.GetKeyDown(KeyCode.Return);
 
-        for (int i = 0; i < _enemies.Count; ++i)
+        foreach (var enemy in _enemies)
         {
-            var enemy = _enemies[i];
-            enemy.Move(Speed * Time.deltaTime);
+            enemy.MoveTo(Speed * AudioSource.time);
+        }
 
-            if (EnemyPassedBy(enemy))
-            {
-                RemoveEnemy(enemy, ref i);
-            }
+        if (!_enemies.Any()) return;
 
-            if (attackTriggered && EnemyCanBeHit(enemy))
-            {
-                RemoveEnemy(enemy, ref i);
-                return;
-            }
+        var nextEnemy = _enemies[0];
+        
+        if (EnemyHitViking(nextEnemy))
+        {
+            RemoveEnemy(nextEnemy);
+            return;
+        }
 
-            if (spinTriggered && EnemyCanBeSpinHit(enemy))
-            {
-                RemoveEnemy(enemy, ref i);
-                return;
-            }
+        if (EnemyPassedBy(nextEnemy))
+        {
+            RemoveEnemy(nextEnemy);
+            return;
+        }
 
-            if (EnemyHitViking(enemy))
-            {
-                RemoveEnemy(enemy, ref i);
-            }
-		}
+        if (attackTriggered && EnemyCanBeHit(nextEnemy))
+        {
+            RemoveEnemy(nextEnemy);
+            return;
+        }
+
+        if (_enemies.Count <= 1) return;
+
+        var secondEnemy = _enemies[1];
+        var spinTriggered = Input.GetKeyDown(KeyCode.Return);
+        if (spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
+        {
+            RemoveEnemy(nextEnemy);
+            RemoveEnemy(secondEnemy);
+        }
 	}
 
-    private bool EnemyCanBeSpinHit(Enemy enemy)
+    private bool EnemiesCanBeSpinHit(Enemy enemy1, Enemy enemy2)
     {
-        var enemyCollider = enemy.GetComponent<BoxCollider2D>();
+        var col1 = enemy1.GetComponent<BoxCollider2D>();
+        var col2 = enemy2.GetComponent<BoxCollider2D>();
 
         var left = _viking.SpinCollider[0];
         var right = _viking.SpinCollider[1];
 
-        var spin1 = left.IsTouching(enemyCollider) && _enemies.Any(e => right.IsTouching(e.GetComponent<BoxCollider2D>()));
-        var spin2 = right.IsTouching(enemyCollider) && _enemies.Any(e => left.IsTouching(e.GetComponent<BoxCollider2D>()));
+        var spin1 = left.IsTouching(col1) || right.IsTouching(col1);
+        var spin2 = left.IsTouching(col2) || right.IsTouching(col2);
 
-        return spin1 || spin2;
+        return spin1 && spin2;
     }
 
     private bool EnemyCanBeHit(Enemy enemy)
@@ -126,18 +143,17 @@ public class GameManager : MonoBehaviour
     }
     
 
-    private void RemoveEnemy(Enemy enemy, ref int i)
+    private void RemoveEnemy(Enemy enemy)
     {
 		//blood explosion
 		Instantiate(BloodExplosion, enemy.transform.position, enemy.transform.rotation);
 
 		Destroy(enemy.gameObject);
         _enemies.Remove(enemy);
-        --i;
     }
 
     private bool EnemyPassedBy(Enemy enemy)
     {
-        return enemy.height > _viking.Height + 2;
+        return enemy.currentHeight > _viking.Height + 2;
     }
 }
