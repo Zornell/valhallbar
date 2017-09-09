@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
 
+		var r = new System.Random();
+
 
 		var lines = LevelData.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var line in lines)
@@ -36,7 +38,8 @@ public class GameManager : MonoBehaviour
 			var strings = line.Split(',');
 			var time = int.Parse(strings[0]);
 			var lane = int.Parse(strings[1]);
-			var enemyType = int.Parse(strings[2]);
+			//var enemyType = int.Parse(strings[2]);
+			var enemyType = r.Next(5);
 
 		    Debug.Assert(enemyType < 6);
 
@@ -70,35 +73,43 @@ public class GameManager : MonoBehaviour
 
         if (!_enemies.Any()) return;
 
-        var nextEnemy = _enemies[0];
+		int max_props = 5;
+		if (_enemies.Count < 5)
+			max_props = _enemies.Count;
+
+		for (int i = 0; i < max_props; ++i) {
+			var nextEnemy = _enemies[i];
+
+			if (EnemyHitViking(nextEnemy))
+			{
+				RemoveEnemy(nextEnemy);
+				return;
+			}
+
+			if (EnemyPassedBy(nextEnemy))
+			{
+				RemoveEnemy(nextEnemy);
+				return;
+			}
+
+			if (attackTriggered && EnemyCanBeHit(nextEnemy))
+			{
+				RemoveEnemy(nextEnemy);
+				return;
+			}
+
+			if ( i + 1 >= max_props) return;
+
+			var secondEnemy = _enemies[i+1];
+			var spinTriggered = Input.GetKeyDown(KeyCode.Return);
+			if (spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
+			{
+				RemoveEnemy(nextEnemy);
+				RemoveEnemy(secondEnemy);
+			}
+		}
+
         
-        if (EnemyHitViking(nextEnemy))
-        {
-            RemoveEnemy(nextEnemy);
-            return;
-        }
-
-        if (EnemyPassedBy(nextEnemy))
-        {
-            RemoveEnemy(nextEnemy);
-            return;
-        }
-
-        if (attackTriggered && EnemyCanBeHit(nextEnemy))
-        {
-            RemoveEnemy(nextEnemy);
-            return;
-        }
-
-        if (_enemies.Count <= 1) return;
-
-        var secondEnemy = _enemies[1];
-        var spinTriggered = Input.GetKeyDown(KeyCode.Return);
-        if (spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
-        {
-            RemoveEnemy(nextEnemy);
-            RemoveEnemy(secondEnemy);
-        }
 	}
 
     private bool EnemiesCanBeSpinHit(Enemy enemy1, Enemy enemy2)
