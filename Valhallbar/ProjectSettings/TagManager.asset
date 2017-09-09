@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 1214547149
+    locked: 0
+  - name: Wall
+    uniqueID: 1667585371
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TavernObjects
+    uniqueID: 2970266559
     locked: 0
