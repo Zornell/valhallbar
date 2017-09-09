@@ -73,7 +73,7 @@ namespace R2D {
 		public const string snapToGrid					= "Snap To Grid";
 		public const string gridEnabled					= "Display Grid";
 		public const string toggleUnityGrid				= "Toggle Unity Grid";
-		public const string nguiGridHelp				= "Use the standard move tool in order to snap NGUI objects to the grid.";
+		public const string nguiGridHelp				= "Use the standard Move tool in order to snap NGUI objects to the grid.";
 		public const string sceneModeError				= "Ruler 2D is not available when the Scene View is in 3D mode.";
 		public const string set2DSceneMode				= "Switch Scene View to 2D mode.";
 		public const string undoAlignTop				= "Align Top Edges";

@@ -6,10 +6,11 @@ using UnityEngine;
 public class GenerateEnemies : MonoBehaviour
 {
     public GameObject EnemyPrefab;
+    public float Speed = 4;
 
     // Use this for initialization
 	void Start () {
-	    var input = (TextAsset) Resources.Load("input");
+	    var input = (TextAsset) Resources.Load("technoviking_all");
 	    var lines = input.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 	    foreach (var line in lines)
 	    {
@@ -22,7 +23,9 @@ public class GenerateEnemies : MonoBehaviour
             
             var newObj = Instantiate(EnemyPrefab);
             newObj.transform.SetParent(transform);
-	        newObj.transform.position = new Vector3(-4 + laneOffset * lane, -time/1000*2);
+	        newObj.transform.position = new Vector3(-4 + laneOffset * lane, (-time * Speed/1000f) + 1.5f );
+	        var behaviour = newObj.GetComponent<MoveUpwards>();
+	        behaviour.Speed = Speed;
 	    }
     }
 	

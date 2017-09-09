@@ -1,31 +1,33 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-
-	public GameObject Enemy01Prefab;
+public class GameManager : MonoBehaviour
+{
+    public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
 
-	const int lanes = 5;
-	const int laneOffset = 2;
-	const int speed = 2;
+    public TextAsset LevelData;
+    [Range(-2f, 3f)]
+    public float SpawnHeightOffset = 1.5f;
 
-	int vikingLane = 0;
-	const int vikingHeight = 4;
-
-	Viking theViking;
-	List<Enemy> enemies = new List<Enemy>();
+    public int Lanes = 5;
+    public int LaneOffset = 2;
+    public int Speed = 4;
+    
+    private Viking _viking;
+    private readonly List<Enemy> _enemies = new List<Enemy>();
 
 	// Use this for initialization
-	void Start () {
-		theViking = Instantiate(VikingPrefab).GetComponent<Viking>();
-		theViking.laneOffset = laneOffset;
+	void Start ()
+    {
+        Debug.Assert(EnemyPrefabs.Length == 5);
+
+		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
+		_viking.laneOffset = LaneOffset;
 
 
-		var input = (TextAsset) Resources.Load("input");
-		var lines = input.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+		var lines = LevelData.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var line in lines)
 		{
 			var strings = line.Split(',');
@@ -33,35 +35,56 @@ public class GameManager : MonoBehaviour {
 			var lane = int.Parse(strings[1]);
 			var enemyType = int.Parse(strings[2]);
 
-			var newObj = Instantiate (Enemy01Prefab).GetComponent<Enemy> ();
-			newObj.lane = -2 + lane;
-			newObj.laneOffset = 2;
-			newObj.height = -time / 1000 * 2;
-			enemies.Add (newObj);
+		    Debug.Assert(enemyType < 6);
+
+		    var enemyObject = Instantiate (EnemyPrefabs[enemyType]);
+		    var newObj = enemyObject.GetComponent<Enemy>();
+
+			newObj.lane = -(Lanes/2) + lane;
+			newObj.laneOffset = LaneOffset;
+			newObj.height = -time / 1000f * Speed + SpawnHeightOffset;
+            
+			_enemies.Add (newObj);
 		}
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-		// move
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			theViking.move (-1);
-			Debug.Log ("lane++");
-		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			theViking.move (1);
-			Debug.Log ("lane--");
+	void Update ()
+    {
+        // Move
+		if (Input.GetKeyDown (KeyCode.LeftArrow))
+        {
+			_viking.Move (-1);
 		}
-			
-		for (int i = 0; i < enemies.Count; ++i) {
-			enemies[i].move(speed * Time.deltaTime);
-			if (enemies[i].lane == theViking.lane && enemies[i].height > 3) {
-				Debug.Log ("Hit!");
+        else if (Input.GetKeyDown (KeyCode.RightArrow))
+        {
+			_viking.Move (1);
+		}
 
-				Destroy (enemies [i].gameObject);
-				enemies.Remove(enemies[i]);
-				--i;
-			}
+
+        var attackTriggered = Input.GetKeyDown(KeyCode.Space);
+
+        for (int i = 0; i < _enemies.Count; ++i)
+        {
+            var enemy = _enemies[i];
+            enemy.Move(Speed * Time.deltaTime);
+
+            if (EnemyPassedBy(enemy))
+            {
+                RemoveEnemy(enemy, ref i);
+            }
 		}
 	}
+
+    private void RemoveEnemy(Enemy enemy, ref int i)
+    {
+        Destroy(enemy.gameObject);
+        _enemies.Remove(enemy);
+        --i;
+    }
+
+    private bool EnemyPassedBy(Enemy enemy)
+    {
+        return enemy.height > _viking.Height + 2;
+    }
 }

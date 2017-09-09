@@ -30,7 +30,7 @@ namespace R2D {
 				LocateRightX( cornerInfos );
 			}
 
-			// lets move these objects
+			// lets Move these objects
 			foreach( CornerInfo cornerInfo in cornerInfos ) {
 				float objTarget = state.snapEdges ? cornerInfo.userValue1 : ( cornerInfo.userValue1 + cornerInfo.userValue2 ) / 2f;
 
@@ -70,7 +70,7 @@ namespace R2D {
 				LocateLeftX( cornerInfos );
 			}
 			
-			// lets move these objects
+			// lets Move these objects
 			foreach( CornerInfo cornerInfo in cornerInfos ) {
 				float objTarget = state.snapEdges ? cornerInfo.userValue1 : ( cornerInfo.userValue1 + cornerInfo.userValue2 ) / 2f;
 				
@@ -110,7 +110,7 @@ namespace R2D {
 				LocateBotY( cornerInfos );
 			}
 
-			// lets move these objects
+			// lets Move these objects
 			foreach( CornerInfo cornerInfo in cornerInfos ) {
 				float objTarget = state.snapEdges ? cornerInfo.userValue1 : ( cornerInfo.userValue1 + cornerInfo.userValue2 ) / 2f;
 				
@@ -150,7 +150,7 @@ namespace R2D {
 				LocateTopY( cornerInfos );
 			}
 			
-			// lets move these objects
+			// lets Move these objects
 			foreach( CornerInfo cornerInfo in cornerInfos ) {
 				float objTarget = state.snapEdges ? cornerInfo.userValue1 : ( cornerInfo.userValue1 + cornerInfo.userValue2 ) / 2f;
 				

@@ -4,16 +4,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 	public int laneOffset;
-	public int lane = 0;
-	public int lanes;
+	public int lane;
 	public float height;
 
-	public void move (float heightDelta) {
+	public void Move (float heightDelta)
+    {
 		height += heightDelta; 
 	}
 
-	public void Update () {
-		this.transform.position = new Vector3 (lane * laneOffset, height, 0);
+	public void Update ()
+    {
+		transform.position = new Vector3 (lane * laneOffset, height, 0);
 	}
 
 }
