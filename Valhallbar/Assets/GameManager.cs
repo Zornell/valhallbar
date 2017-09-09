@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
+	public GameObject BloodExplosion;
 
-    public TextAsset LevelData;
+	public TextAsset LevelData;
 
     [Range(-2f, 3f)] public float SpawnHeightOffset = 1.5f;
 
@@ -127,7 +128,10 @@ public class GameManager : MonoBehaviour
 
     private void RemoveEnemy(Enemy enemy, ref int i)
     {
-        Destroy(enemy.gameObject);
+		//blood explosion
+		Instantiate(BloodExplosion, enemy.transform.position, enemy.transform.rotation);
+
+		Destroy(enemy.gameObject);
         _enemies.Remove(enemy);
         --i;
     }
