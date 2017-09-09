@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
 
+		var r = new System.Random();
+
 
 		var lines = LevelData.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var line in lines)
@@ -36,7 +38,8 @@ public class GameManager : MonoBehaviour
 			var strings = line.Split(',');
 			var time = int.Parse(strings[0]);
 			var lane = int.Parse(strings[1]);
-			var enemyType = int.Parse(strings[2]);
+			//var enemyType = int.Parse(strings[2]);
+			var enemyType = r.Next(5);
 
 		    Debug.Assert(enemyType < 6);
 
