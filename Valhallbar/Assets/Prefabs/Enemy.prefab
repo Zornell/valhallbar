@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4796291080081036}
   - component: {fileID: 212092436205812206}
-  - component: {fileID: 114546100593065896}
+  - component: {fileID: 114962651687186576}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114546100593065896
+--- !u!114 &114962651687186576
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,10 +49,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006605133393322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ad9c51edbef7e4492b3761085ab961, type: 3}
+  m_Script: {fileID: 11500000, guid: e405ff8c663a14318876fe1da2956c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  laneOffset: 0
+  lane: 0
+  lanes: 0
+  height: 0
 --- !u!212 &212092436205812206
 SpriteRenderer:
   m_ObjectHideFlags: 1

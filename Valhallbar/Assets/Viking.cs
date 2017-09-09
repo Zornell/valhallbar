@@ -1,29 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Viking : MonoBehaviour {
 
-	int lane = 3;
-	int laneOffset = 2;
+	public const int height = 4;
+	public int laneOffset;
+	public int lanes;
+	public int lane = 0;
 
-	// Use this for initialization
-	void Start () {
-		
+	public void move (int laneDelta) {
+		var newlane = lane + laneDelta;
+		if ( newlane < 3 && newlane > - 3)
+			lane = newlane; 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		Debug.Log (Input.anyKeyDown);
 
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && lane > 1) {
-			lane -= 1;
-			Debug.Log ("lane++");
-		} else if (Input.GetKeyDown (KeyCode.RightArrow) && lane < 5) {
-			lane += 1;
-			Debug.Log ("lane--");
-		}
-
-		this.transform.position = new Vector3(- 3*laneOffset + lane*laneOffset, 4, 0);
+	public void Update () {
+		this.transform.position = new Vector3 (lane * laneOffset, height, 0);
 	}
+
 }
