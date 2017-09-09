@@ -57,8 +57,11 @@ MonoBehaviour:
   - {fileID: 1006605133393322, guid: d4ce70a798a6b2644a1b00eead1e51a2, type: 2}
   - {fileID: 1006605133393322, guid: bf241e3f89fd597408d64ee6e8bfd73c, type: 2}
   - {fileID: 1006605133393322, guid: 989b549e9d9a5564bb3acf1bee2d6602, type: 2}
-  VikingPrefab: {fileID: 1006605133393322, guid: 1dee20e3947bdb54cb6713e1ee8f45a9,
+  VikingPrefab: {fileID: 1534564793930858, guid: ed28dc6f519f74ed48773e6cbe99637d,
     type: 2}
+  BloodExplosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
+  LevelData: {fileID: 4900000, guid: d14ffc50e8644a2418d8cecc50c5caf9, type: 3}
+  SpawnHeightOffset: 1.5
   Lanes: 5
   LaneOffset: 2
   Speed: 4
