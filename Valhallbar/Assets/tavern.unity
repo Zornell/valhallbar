@@ -1023,6 +1023,12 @@ Prefab:
       propertyPath: LevelData
       value: 
       objectReference: {fileID: 4900000, guid: d14ffc50e8644a2418d8cecc50c5caf9, type: 3}
+    - target: {fileID: 114689842210997078, guid: 18744261b1aaa224e98423f3b116fd15,
+        type: 2}
+      propertyPath: VikingPrefab
+      value: 
+      objectReference: {fileID: 1534564793930858, guid: ed28dc6f519f74ed48773e6cbe99637d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18744261b1aaa224e98423f3b116fd15, type: 2}
   m_IsPrefabParent: 0
