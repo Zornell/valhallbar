@@ -22,7 +22,7 @@ public class GenerateEnemies : MonoBehaviour
             
             var newObj = Instantiate(EnemyPrefab);
             newObj.transform.SetParent(transform);
-	        newObj.transform.position = new Vector3(laneOffset * lane, -time/1000*2);
+	        newObj.transform.position = new Vector3(-4 + laneOffset * lane, -time/1000*2);
 	    }
     }
 	
