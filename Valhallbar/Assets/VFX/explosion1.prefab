@@ -261,7 +261,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.6838235, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.597, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 1, b: 0.4117647, a: 1}
@@ -6610,7 +6610,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.672, g: 0.05590399, b: 0.05590399, a: 1}
+      maxColor: {r: 0.478, g: 0.12543254, b: 0.12543254, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6672,8 +6672,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.2
+      scalar: 0.3
+      minScalar: 0.8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7155,108 +7155,18 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: 1
-          inSlope: -6.81637
-          outSlope: -6.81637
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.056542404
-          value: 0.61458606
-          inSlope: -1.0897257
-          outSlope: -1.0897257
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.12509787
-          value: 0.93247217
-          inSlope: -0.035754442
-          outSlope: -0.035754442
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.20259817
-          value: 0.56756765
-          inSlope: -0.52445734
-          outSlope: -0.52445734
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.285517
-          value: 0.8710102
-          inSlope: -0.71699464
-          outSlope: -0.71699464
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.34509146
-          value: 0.5675676
-          inSlope: 0.58743334
-          outSlope: 0.58743334
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.3989871
-          value: 0.9054054
-          inSlope: -0.021812677
-          outSlope: -0.021812677
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.45679212
-          value: 0.5405406
-          inSlope: 2.8124678
-          outSlope: 2.8124678
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.4849186
-          value: 0.87628436
-          inSlope: 3.5944245
-          outSlope: 3.5944245
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.55278397
-          value: 0.5540541
-          inSlope: 0.3759172
-          outSlope: 0.3759172
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.6006373
-          value: 0.81724346
-          inSlope: 0.03904128
-          outSlope: 0.03904128
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.6690492
-          value: 0.44632566
-          inSlope: -0.617398
-          outSlope: -0.617398
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.7123481
-          value: 0.62761974
-          inSlope: -2.0749197
-          outSlope: -2.0749197
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.7450527
-          value: 0.35496563
-          inSlope: -2.979307
-          outSlope: -2.979307
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.80298555
-          value: 0.49274513
-          inSlope: -1.8570583
-          outSlope: -1.8570583
-          tangentMode: 34
-        - serializedVersion: 2
-          time: 0.8417865
-          value: 0.25635502
-          inSlope: -3.8136382
-          outSlope: -3.8136382
-          tangentMode: 34
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 0.013513505
-          inSlope: -1.5348976
-          outSlope: -1.5348976
-          tangentMode: 34
+          value: 0
+          inSlope: -2
+          outSlope: -2
+          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
