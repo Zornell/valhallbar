@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 7833d3410b0584fa1a614806001c7d48
-timeCreated: 1504969667
+timeCreated: 1505058037
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - VikingPrefab: {instanceID: 0}
+  - BloodExplosion: {instanceID: 0}
+  - BloodPool: {instanceID: 0}
+  - AudioSource: {instanceID: 0}
+  - HealthSlider: {instanceID: 0}
+  - LevelData: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

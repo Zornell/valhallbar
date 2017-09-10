@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
-	public GameObject BloodExplosion;
+    public GameObject BloodExplosion;
+    public GameObject BloodPool;
+
     public AudioSource AudioSource;
 	public int PercentDamagePerHit;
 	public Slider HealthSlider;
@@ -188,6 +190,7 @@ public class GameManager : MonoBehaviour
         {
             OnEnemyKilled(enemy);
             Instantiate(BloodExplosion, enemy.transform.position, enemy.transform.rotation);
+            Instantiate(BloodPool, enemy.transform.position, enemy.transform.rotation);
         }
 
         Destroy(enemy.gameObject);
