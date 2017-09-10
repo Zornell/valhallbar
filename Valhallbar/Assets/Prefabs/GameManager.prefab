@@ -258,6 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitSoundSource: {fileID: 82275739173712706}
+  SwitchLaneSoundSource: {fileID: 8300000, guid: c27cd9341110a7644b3d66a04a1b3895,
+    type: 3}
+  AxeSoundSource: {fileID: 8300000, guid: 9ef768a31bafa32449d9b31607f4b6a6, type: 3}
   HitSounds:
   - {fileID: 8300000, guid: 2273f37898db94e48a4546dab2d62d73, type: 3}
   - {fileID: 8300000, guid: 9cd7510e277ce60409a53b3d67af8f8e, type: 3}
