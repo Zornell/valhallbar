@@ -36,7 +36,7 @@ public class SpawnCrowd : MonoBehaviour {
 		foreach ( GameObject person in peopleList) {
 			var threshold = rand.Next (1000);
 			if (threshold < 10) {
-				float y = (rand.Next (3) - 1) * 0.1f;
+				float y = (rand.Next (3) - 1) * 0.05f;
 				person.transform.Translate(0, y, 0);
 			}
 		}		
