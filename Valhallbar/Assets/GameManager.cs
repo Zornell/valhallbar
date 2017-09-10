@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
 			if (EnemyHitViking(nextEnemy))
 			{
-				RemoveEnemy(nextEnemy);
+				RemoveEnemy(nextEnemy, true);
 
 				PlayerHealth -= PercentDamagePerHit;
 				HealthSlider.value = PlayerHealth;
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
 			if (_attackTriggered && EnemyCanBeHit(nextEnemy))
 			{
-				RemoveEnemy(nextEnemy);
+				RemoveEnemy(nextEnemy, true);
 				return;
 			}
 
@@ -128,8 +128,8 @@ public class GameManager : MonoBehaviour
 			var secondEnemy = _enemies[i+1];
 			if (_spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
 			{
-				RemoveEnemy(nextEnemy);
-				RemoveEnemy(secondEnemy);
+				RemoveEnemy(nextEnemy, true);
+				RemoveEnemy(secondEnemy, true);
 			}
 		}
 
@@ -182,15 +182,16 @@ public class GameManager : MonoBehaviour
     }
     
 
-    private void RemoveEnemy(Enemy enemy)
+    private void RemoveEnemy(Enemy enemy, bool wasKilled = false)
     {
-		//blood explosion
-		Instantiate(BloodExplosion, enemy.transform.position, enemy.transform.rotation);
+        if (wasKilled)
+        {
+            OnEnemyKilled(enemy);
+            Instantiate(BloodExplosion, enemy.transform.position, enemy.transform.rotation);
+        }
 
-		Destroy(enemy.gameObject);
+        Destroy(enemy.gameObject);
         _enemies.Remove(enemy);
-
-        OnEnemyKilled(enemy);
     }
 
     private bool EnemyPassedBy(Enemy enemy)
