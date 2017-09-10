@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
 	private void GameOver()
 	{
 		Destroy(_viking.gameObject);
+        Destroy(this.gameObject);
 		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
 	}
 
