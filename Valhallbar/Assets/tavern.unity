@@ -1458,11 +1458,11 @@ Prefab:
       propertyPath: HealthSlider
       value: 
       objectReference: {fileID: 1219814872}
-    - target: {fileID: 82275739173712706, guid: 18744261b1aaa224e98423f3b116fd15,
+    - target: {fileID: 114689842210997078, guid: 18744261b1aaa224e98423f3b116fd15,
         type: 2}
-      propertyPath: m_Volume
-      value: 0.417
-      objectReference: {fileID: 0}
+      propertyPath: LevelData
+      value: 
+      objectReference: {fileID: 4900000, guid: ab8f40c285f2e9b4092682f7cff1098e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18744261b1aaa224e98423f3b116fd15, type: 2}
   m_IsPrefabParent: 0

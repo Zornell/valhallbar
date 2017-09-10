@@ -55,7 +55,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.715
+  m_Volume: 0.417
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -133,7 +133,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 132044a692e10664b8d46c6273549725, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5dfb96415c1bbb842bc45694a864575b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -243,7 +243,7 @@ MonoBehaviour:
   AudioSource: {fileID: 82533624479659958}
   PercentDamagePerHit: 10
   HealthSlider: {fileID: 0}
-  LevelData: {fileID: 4900000, guid: d14ffc50e8644a2418d8cecc50c5caf9, type: 3}
+  LevelData: {fileID: 4900000, guid: 0ae022767e2137b4f842732e8ddef58f, type: 3}
   Speed: 4
 --- !u!114 &114701443804395744
 MonoBehaviour:
