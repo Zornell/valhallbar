@@ -1264,6 +1264,10 @@ Prefab:
       value: 
       objectReference: {fileID: 1098309036509266, guid: 44edb50538f5baf4eb405bb6529112e9,
         type: 2}
+    - target: {fileID: 114689842210997078, guid: 18744261b1aaa224e98423f3b116fd15,
+        type: 2}
+      propertyPath: PlayerHealth
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18744261b1aaa224e98423f3b116fd15, type: 2}
   m_IsPrefabParent: 0

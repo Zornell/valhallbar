@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public GameObject VikingPrefab;
 	public GameObject BloodExplosion;
     public AudioSource AudioSource;
-
+	public int PlayerHealth;
 	public TextAsset LevelData;
 
     private float SpawnHeightOffset = 1.8f;
@@ -87,6 +87,11 @@ public class GameManager : MonoBehaviour
 			if (EnemyHitViking(nextEnemy))
 			{
 				RemoveEnemy(nextEnemy);
+				PlayerHealth--;
+
+				if (PlayerHealth <= 0)
+					//TODO: GameOver();
+
 				return;
 			}
 
