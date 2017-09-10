@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
 				if (PlayerHealth <= 0)
 				{
-					//TODO: GameOver();
+					GameOver();
 				}
 
 				return;
@@ -134,6 +134,12 @@ public class GameManager : MonoBehaviour
 		}
 
         
+	}
+
+	private void GameOver()
+	{
+		Destroy(_viking.gameObject);
+		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
 	}
 
     private void ResetState()
