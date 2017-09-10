@@ -1152,7 +1152,7 @@ GameObject:
   - component: {fileID: 628145937}
   - component: {fileID: 628145939}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScrollText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ad9c51edbef7e4492b3761085ab961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 25
+  Speed: 30
 --- !u!1 &692748509
 GameObject:
   m_ObjectHideFlags: 0
