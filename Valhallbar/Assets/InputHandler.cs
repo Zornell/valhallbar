@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class InputHandler
 {
-    private readonly string _axis;
+	public event EventHandler<EventArgs> SwitchLaneMove;
+
+	private readonly string _axis;
     private readonly Action<int> _doStuff;
     private readonly bool _useTimeout;
     private bool _wasControlling;

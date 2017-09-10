@@ -9,8 +9,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public event EventHandler<EnemyKilledEventArgs> EnemyKilled;
+	public event EventHandler<EventArgs> HitMove;
+	public event EventHandler<EventArgs> SwitchLaneMove;
 
-    public GameObject[] EnemyPrefabs;
+	public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
     public GameObject BloodExplosion;
     public GameObject BloodPool;
@@ -101,6 +103,12 @@ public class GameManager : MonoBehaviour
 		int max_props = 5;
 		if (_enemies.Count < 5)
 			max_props = _enemies.Count;
+
+		if(_attackTriggered && HitMove != null)
+		{
+			HitMove.Invoke(this, null);
+		}
+
 
 		for (int i = 0; i < max_props; ++i) {
 			var nextEnemy = _enemies[i];
@@ -221,5 +229,11 @@ public class GameManager : MonoBehaviour
             Lane = enemy.Lane
         });
     }
+
+	private void OnSwitchLane(object sender, EnemyKilledEventArgs eventArgs)
+	{
+		if (SwitchLaneMove != null)
+			SwitchLaneMove.Invoke(this, null);
+	}
 
 }
