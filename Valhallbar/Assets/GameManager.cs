@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public event EventHandler<EnemyKilledEventArgs> EnemyKilled;
+	public event EventHandler<EventArgs> HitMove;
+	public event EventHandler<EventArgs> SwitchLaneMove;
 
-    public GameObject[] EnemyPrefabs;
+	public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
     public GameObject BloodExplosion;
     public GameObject BloodPool;
@@ -37,6 +40,9 @@ public class GameManager : MonoBehaviour
     private readonly List<Enemy> _enemies = new List<Enemy>();
     private bool _attackTriggered;
     private bool _spinTriggered;
+
+	private float gameoverTime;
+	private bool gameover;
 
 
     void Start ()
@@ -82,6 +88,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+		if(gameover && Time.time - gameoverTime > 5f)
+			SceneManager.LoadScene ("main");
+
         ResetState();
 
         foreach (var enemy in _enemies)
@@ -94,6 +103,12 @@ public class GameManager : MonoBehaviour
 		int max_props = 5;
 		if (_enemies.Count < 5)
 			max_props = _enemies.Count;
+
+		if(_attackTriggered && HitMove != null)
+		{
+			HitMove.Invoke(this, null);
+		}
+
 
 		for (int i = 0; i < max_props; ++i) {
 			var nextEnemy = _enemies[i];
@@ -141,8 +156,11 @@ public class GameManager : MonoBehaviour
 	private void GameOver()
 	{
 		Destroy(_viking.gameObject);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
 		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
+		gameoverTime = Time.time;
+		gameover = true;
+		SceneManager.LoadScene ("gameover",LoadSceneMode.Additive);
 	}
 
     private void ResetState()
@@ -211,5 +229,11 @@ public class GameManager : MonoBehaviour
             Lane = enemy.Lane
         });
     }
+
+	private void OnSwitchLane(object sender, EnemyKilledEventArgs eventArgs)
+	{
+		if (SwitchLaneMove != null)
+			SwitchLaneMove.Invoke(this, null);
+	}
 
 }
