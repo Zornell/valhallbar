@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4905471609984464}
   - component: {fileID: 114689842210997078}
+  - component: {fileID: 82533624479659958}
+  - component: {fileID: 114137680162216726}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +42,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82533624479659958
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907921558027458}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 132044a692e10664b8d46c6273549725, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114137680162216726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907921558027458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ecfaf125aca8d4fa8b77a41c7b8548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Magnitude: 2
+  Roughness: 3
+  FadeInTime: 0.2
+  FadeOutTime: 0.2
 --- !u!114 &114689842210997078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,8 +154,12 @@ MonoBehaviour:
   - {fileID: 1006605133393322, guid: d4ce70a798a6b2644a1b00eead1e51a2, type: 2}
   - {fileID: 1006605133393322, guid: bf241e3f89fd597408d64ee6e8bfd73c, type: 2}
   - {fileID: 1006605133393322, guid: 989b549e9d9a5564bb3acf1bee2d6602, type: 2}
-  VikingPrefab: {fileID: 1006605133393322, guid: 1dee20e3947bdb54cb6713e1ee8f45a9,
+  VikingPrefab: {fileID: 1534564793930858, guid: ed28dc6f519f74ed48773e6cbe99637d,
     type: 2}
+  BloodExplosion: {fileID: 1651242455246062, guid: da98040aa44153d45b19dc77ec81dde0,
+    type: 2}
+  AudioSource: {fileID: 82533624479659958}
+  LevelData: {fileID: 4900000, guid: d14ffc50e8644a2418d8cecc50c5caf9, type: 3}
   Lanes: 5
   LaneOffset: 2
   Speed: 4

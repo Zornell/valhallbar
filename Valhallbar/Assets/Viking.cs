@@ -7,6 +7,9 @@ public class Viking : MonoBehaviour {
 	public int laneOffset;
 	public int lanes;
 	public int lane = 0;
+    public BoxCollider2D HitCollider;
+    public BoxCollider2D AttackCollider;
+    public BoxCollider2D[] SpinCollider;
 
 	public void Move (int laneDelta) {
 		var newlane = lane + laneDelta;
