@@ -302,10 +302,10 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0.31617647, g: 0.31617647, b: 0.31617647, a: 1}
+      color: {r: 0.11764705, g: 0.11764705, b: 0.11764705, a: 1}
       center: {x: 0.46, y: 0.73}
-      intensity: 0.465
-      smoothness: 0.289
+      intensity: 0.495
+      smoothness: 0.526
       roundness: 0.874
       mask: {fileID: 0}
       opacity: 1
