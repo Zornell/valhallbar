@@ -25,18 +25,28 @@ public class GameManager : MonoBehaviour
 	public static int Lanes = 5;
     public static int LaneOffset = 2;
     public int Speed = 4;
-    
-	private float lastMovement = 0.0f;
+
+
+    private InputHandler _attackHandler;
+    private InputHandler _moveHandler;
+    private InputHandler _spinHandler;
 
     private Viking _viking;
     private readonly List<Enemy> _enemies = new List<Enemy>();
+    private bool _attackTriggered;
+    private bool _spinTriggered;
 
-	void Start ()
+
+    void Start ()
     {
         Debug.Assert(EnemyPrefabs.Length == 5);
 
 		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
+
+        _attackHandler = new InputHandler("Fire1", i => _attackTriggered = true);
+        _spinHandler = new InputHandler("Fire2", i => _spinTriggered = true);
+        _moveHandler = new InputHandler("Horizontal", _viking.Move);
 
 		var r = new System.Random();
 
@@ -70,9 +80,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        MovePlayer();
-
-		var attackTriggered = Input.GetAxis ("Fire1") > 0;
+        ResetState();
 
         foreach (var enemy in _enemies)
         {
@@ -109,7 +117,7 @@ public class GameManager : MonoBehaviour
 				return;
 			}
 
-			if (attackTriggered && EnemyCanBeHit(nextEnemy))
+			if (_attackTriggered && EnemyCanBeHit(nextEnemy))
 			{
 				RemoveEnemy(nextEnemy);
 				return;
@@ -118,8 +126,7 @@ public class GameManager : MonoBehaviour
 			if ( i + 1 >= max_props) return;
 
 			var secondEnemy = _enemies[i+1];
-			var spinTriggered = Input.GetAxis ("Fire2") > 0;
-			if (spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
+			if (_spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
 			{
 				RemoveEnemy(nextEnemy);
 				RemoveEnemy(secondEnemy);
@@ -128,6 +135,16 @@ public class GameManager : MonoBehaviour
 
         
 	}
+
+    private void ResetState()
+    {
+        _attackTriggered = false;
+        _spinTriggered = false;
+
+        _moveHandler.Process();
+        _attackHandler.Process();
+        _spinHandler.Process();
+    }
 
     private bool EnemiesCanBeSpinHit(Enemy enemy1, Enemy enemy2)
     {
@@ -156,29 +173,6 @@ public class GameManager : MonoBehaviour
 
         return _viking.HitCollider.IsTouching(enemyCollider);
     }
-
-
-    private void MovePlayer()
-    {
-		if (Time.time - lastMovement > 0.2f) {
-
-			double movement = Input.GetAxis ("Horizontal");
-
-			if (movement > 0)
-				movement = Math.Ceiling (movement);
-			else
-				movement = Math.Floor (movement);
-
-			int movelane = (int)movement;
-
-			if (movelane != 0) {
-				lastMovement = Time.time;
-				_viking.Move ((int)movement);
-			}
-
-				
-		}
-    }
     
 
     private void RemoveEnemy(Enemy enemy)
@@ -206,4 +200,5 @@ public class GameManager : MonoBehaviour
             Lane = enemy.Lane
         });
     }
+
 }
