@@ -1174,7 +1174,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -950}
-  m_SizeDelta: {x: 800, y: 800}
+  m_SizeDelta: {x: 900, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &628145937
 MonoBehaviour:
@@ -1196,8 +1196,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8c1f14477d0f14b929daf9b8cd0808b2, type: 3}
-    m_FontSize: 28
+    m_Font: {fileID: 12800000, guid: 0457e037ec42c4027900c79fd7acef87, type: 3}
+    m_FontSize: 36
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -1210,17 +1210,17 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Our beloved viking Snorre went out for an evening in his favourite tavern,
     the Valhallbar. He and his friends relished quite a number of drinking horns filled
-    with the finest mead and were intruiged by the delightful sight of women dancing
+    with the finest mead and were intrigued by the delightful sight of women dancing
     to folk music.
 
 
     Later that evening, the owner of the bar called out a karaoke contest with a barrel
     of mead as first prize. The now slightly drunken Snorre seized the opportunity
-    and manoeuvered himself through the motley crowd onto the stage.
+    and manoeuvred himself through the motley crowd onto the stage.
 
 
-    Despite he gave it his best shot, not much time passed until Snorre found himself
-    in front of a wrought-up, booing crowd. With wounded pride and the unability to
+    Despite giving it his best shot, not much time passed until Snorre found himself
+    in front of a wrought-up, booing crowd. With wounded pride and the inability to
     accept criticism, Snorre swooped into the jostling crowd..'
 --- !u!222 &628145938
 CanvasRenderer:
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ad9c51edbef7e4492b3761085ab961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
+  Speed: 25
 --- !u!1 &692748509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,6 +2903,7 @@ GameObject:
   - component: {fileID: 1988842546}
   - component: {fileID: 1988842545}
   - component: {fileID: 1988842544}
+  - component: {fileID: 1988842549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2980,6 +2981,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988842549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1988842543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: be4405128e1824d3a95c8fb54b69d3a3, type: 2}
 --- !u!1 &1995002888
 GameObject:
   m_ObjectHideFlags: 0
