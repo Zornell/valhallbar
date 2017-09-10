@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
 		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
 
-        _attackHandler = new InputHandler("Fire1", i => _attackTriggered = true);
-        _spinHandler = new InputHandler("Fire2", i => _spinTriggered = true);
+        _attackHandler = new InputHandler("Fire1", i => _attackTriggered = true, true);
+        _spinHandler = new InputHandler("Fire2", i => _spinTriggered = true, true);
         _moveHandler = new InputHandler("Horizontal", _viking.Move);
 
 		var r = new System.Random();
