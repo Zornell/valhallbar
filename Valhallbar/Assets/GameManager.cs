@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
-    public event EventHandler EnemyKilled;
+    public event EventHandler<EnemyKilledEventArgs> EnemyKilled;
 
     public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     private float SpawnHeightOffset = 1.8f;
 
-    public int Lanes = 5;
-    public int LaneOffset = 2;
+    public static int Lanes = 5;
+    public static int LaneOffset = 2;
     public int Speed = 4;
     
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 		    var enemyObject = Instantiate (EnemyPrefabs[enemyType]);
 		    var newObj = enemyObject.GetComponent<Enemy>();
 
-			newObj.lane = -(Lanes/2) + lane;
+			newObj.Lane = -(Lanes/2) + lane;
 			newObj.laneOffset = LaneOffset;
 			newObj.height = -time / 1000f * Speed + SpawnHeightOffset;
 		    newObj.time = time;
@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
 		Destroy(enemy.gameObject);
         _enemies.Remove(enemy);
 
-        OnEnemyKilled();
+        OnEnemyKilled(enemy);
     }
 
     private bool EnemyPassedBy(Enemy enemy)
@@ -174,9 +174,13 @@ public class GameManager : MonoBehaviour
         return enemy.currentHeight > _viking.Height + 2;
     }
 
-    protected virtual void OnEnemyKilled()
+    protected virtual void OnEnemyKilled(Enemy enemy)
     {
         var handler = EnemyKilled;
-        if (handler != null) handler(this, EventArgs.Empty);
+        if (handler != null) handler(this, new EnemyKilledEventArgs()
+        {
+            EnemyType = enemy.EnemyType,
+            Lane = enemy.Lane
+        });
     }
 }
