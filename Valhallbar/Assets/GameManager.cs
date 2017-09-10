@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
@@ -12,12 +13,16 @@ public class GameManager : MonoBehaviour
 	public GameObject VikingPrefab;
 	public GameObject BloodExplosion;
     public AudioSource AudioSource;
-	public int PlayerHealth;
+	public int PercentDamagePerHit;
+	public Slider HealthSlider;
 	public TextAsset LevelData;
 
     private float SpawnHeightOffset = 1.8f;
+	//100% health
+	private int PlayerHealth = 100;
 
-    public static int Lanes = 5;
+
+	public static int Lanes = 5;
     public static int LaneOffset = 2;
     public int Speed = 4;
     
@@ -26,7 +31,7 @@ public class GameManager : MonoBehaviour
     private Viking _viking;
     private readonly List<Enemy> _enemies = new List<Enemy>();
 
-    void Start ()
+	void Start ()
     {
         Debug.Assert(EnemyPrefabs.Length == 5);
 
@@ -87,10 +92,14 @@ public class GameManager : MonoBehaviour
 			if (EnemyHitViking(nextEnemy))
 			{
 				RemoveEnemy(nextEnemy);
-				PlayerHealth--;
+
+				PlayerHealth -= PercentDamagePerHit;
+				HealthSlider.value = PlayerHealth;
 
 				if (PlayerHealth <= 0)
+				{
 					//TODO: GameOver();
+				}
 
 				return;
 			}
