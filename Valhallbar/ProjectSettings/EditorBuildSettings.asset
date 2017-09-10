@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/main.unity
+    guid: d3f6a51d13cb74125aedca85ad96d0f7
+  - enabled: 1
+    path: Assets/stage.unity
+    guid: 6b3fee07ba3b6a542a6d9827a836f01c
+  - enabled: 1
+    path: Assets/tavern.unity
+    guid: b1d6a9c42b610f04793470594577046a
+  - enabled: 1
+    path: Assets/mainmenu.unity
+    guid: d3ca6460a670345bc871591e0d9cc6dd
