@@ -32,12 +32,17 @@ public class SceneJainitor : MonoBehaviour {
         StartCoroutine(StartWithGame());
         _source.Play();
         var mainMenu = GameObject.Find("MainMenu");
+        var karaokee = GameObject.Find("Karaokee");
+
+        karaokee.SetActive(false);
         mainMenu.SetActive(false);
     }
 
     private IEnumerator StartWithGame()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(8f);
+        
+
         SceneManager.LoadScene("tavern", LoadSceneMode.Single);
     }
 
