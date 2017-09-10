@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public static int LaneOffset = 2;
     public int Speed = 4;
     
-
+	private float lastMovement = 0.0f;
 
     private Viking _viking;
     private readonly List<Enemy> _enemies = new List<Enemy>();
@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
 		_viking.laneOffset = LaneOffset;
 
 		var r = new System.Random();
-
 
 		var lines = LevelData.text.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var line in lines)
@@ -73,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
         MovePlayer();
 
-        var attackTriggered = Input.GetKeyDown(KeyCode.Space);
+		var attackTriggered = Input.GetAxis ("Fire1") > 0;
 
         foreach (var enemy in _enemies)
         {
@@ -119,7 +118,7 @@ public class GameManager : MonoBehaviour
 			if ( i + 1 >= max_props) return;
 
 			var secondEnemy = _enemies[i+1];
-			var spinTriggered = Input.GetKeyDown(KeyCode.Return);
+			var spinTriggered = Input.GetAxis ("Fire2") > 0;
 			if (spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
 			{
 				RemoveEnemy(nextEnemy);
@@ -161,14 +160,24 @@ public class GameManager : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            _viking.Move(-1);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            _viking.Move(1);
-        }
+		if (Time.time - lastMovement > 0.2f) {
+
+			double movement = Input.GetAxis ("Horizontal");
+
+			if (movement > 0)
+				movement = Math.Ceiling (movement);
+			else
+				movement = Math.Floor (movement);
+
+			int movelane = (int)movement;
+
+			if (movelane != 0) {
+				lastMovement = Time.time;
+				_viking.Move ((int)movement);
+			}
+
+				
+		}
     }
     
 
