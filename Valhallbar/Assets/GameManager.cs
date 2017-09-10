@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
+    public event EventHandler EnemyKilled;
+
     public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
 	public GameObject BloodExplosion;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int LaneOffset = 2;
     public int Speed = 4;
     
+
+
     private Viking _viking;
     private readonly List<Enemy> _enemies = new List<Enemy>();
 
@@ -161,10 +165,18 @@ public class GameManager : MonoBehaviour
 
 		Destroy(enemy.gameObject);
         _enemies.Remove(enemy);
+
+        OnEnemyKilled();
     }
 
     private bool EnemyPassedBy(Enemy enemy)
     {
         return enemy.currentHeight > _viking.Height + 2;
+    }
+
+    protected virtual void OnEnemyKilled()
+    {
+        var handler = EnemyKilled;
+        if (handler != null) handler(this, EventArgs.Empty);
     }
 }
