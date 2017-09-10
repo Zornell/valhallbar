@@ -1468,6 +1468,12 @@ Prefab:
       propertyPath: m_Volume
       value: 0.546
       objectReference: {fileID: 0}
+    - target: {fileID: 114689842210997078, guid: 18744261b1aaa224e98423f3b116fd15,
+        type: 2}
+      propertyPath: BloodPool
+      value: 
+      objectReference: {fileID: 1350262187680034, guid: 93d8b9c08dc4df94a80a46c26eba59c7,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18744261b1aaa224e98423f3b116fd15, type: 2}
   m_IsPrefabParent: 0
