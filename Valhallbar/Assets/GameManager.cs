@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
     private readonly List<Enemy> _enemies = new List<Enemy>();
     private bool _attackTriggered;
     private bool _spinTriggered;
+
+	private float gameoverTime;
+	private bool gameover;
 
 
     void Start ()
@@ -82,6 +86,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+		if(gameover && Time.time - gameoverTime > 5f)
+			SceneManager.LoadScene ("main");
+
         ResetState();
 
         foreach (var enemy in _enemies)
@@ -141,8 +148,11 @@ public class GameManager : MonoBehaviour
 	private void GameOver()
 	{
 		Destroy(_viking.gameObject);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
 		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
+		gameoverTime = Time.time;
+		gameover = true;
+		SceneManager.LoadScene ("gameover",LoadSceneMode.Additive);
 	}
 
     private void ResetState()
