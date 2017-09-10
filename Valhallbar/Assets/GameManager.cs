@@ -44,13 +44,17 @@ public class GameManager : MonoBehaviour
 	private float gameoverTime;
 	private bool gameover;
 
+    private Animator _vikingAnimator;
+
 
     void Start ()
     {
         Debug.Assert(EnemyPrefabs.Length == 5);
 
-		_viking = Instantiate(VikingPrefab).GetComponent<Viking>();
+        var vikingGo = Instantiate(VikingPrefab);
+        _viking = vikingGo.GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
+        _vikingAnimator = _viking.GetComponentInChildren<Animator>();
 
         _attackHandler = new InputHandler("Fire1", i => _attackTriggered = true, true);
         _spinHandler = new InputHandler("Fire2", i => _spinTriggered = true, true);
@@ -137,6 +141,7 @@ public class GameManager : MonoBehaviour
 			if (_attackTriggered && EnemyCanBeHit(nextEnemy))
 			{
 				RemoveEnemy(nextEnemy, true);
+                _vikingAnimator.SetTrigger("Attack");
 				return;
 			}
 
