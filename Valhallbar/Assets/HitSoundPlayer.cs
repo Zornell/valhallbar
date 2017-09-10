@@ -32,7 +32,7 @@ public class HitSoundPlayer : MonoBehaviour
 
 	private void PlayAxeSound(object sender, EventArgs eventArgs)
 	{
-		HitSoundSource.PlayOneShot(AxeSoundSource);
+		//HitSoundSource.PlayOneShot(AxeSoundSource);
 	}
 
 	private void PlaySwitchLane(object sender, EventArgs eventArgs)
