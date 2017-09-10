@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
 				if (PlayerHealth <= 0)
 				{
-					//TODO: GameOver();
+					GameOver();
 				}
 
 				return;
@@ -129,7 +129,13 @@ public class GameManager : MonoBehaviour
         
 	}
 
-    private bool EnemiesCanBeSpinHit(Enemy enemy1, Enemy enemy2)
+	private void GameOver()
+	{
+		Destroy(_viking.gameObject);
+		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
+	}
+
+	private bool EnemiesCanBeSpinHit(Enemy enemy1, Enemy enemy2)
     {
         var col1 = enemy1.GetComponent<BoxCollider2D>();
         var col2 = enemy2.GetComponent<BoxCollider2D>();
