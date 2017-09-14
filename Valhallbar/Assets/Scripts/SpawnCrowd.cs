@@ -19,7 +19,6 @@ public class SpawnCrowd : MonoBehaviour {
 		for (int r = 0; r < Rows; ++r) {
 			for (int i = 0; i < Length; ++i) {
 				int idx = rand.Next (People.GetLength (0));
-				Debug.Log (idx);
 				var newObj = Instantiate (People [idx]);
 				float x_offset = (r % 2) * 0.5f;
 				float x = Left + i + x_offset + (rand.Next(3) - 1) * 0.2f;

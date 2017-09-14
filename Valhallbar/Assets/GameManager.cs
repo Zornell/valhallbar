@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public event EventHandler<EnemyKilledEventArgs> EnemyKilled;
-	public event EventHandler<EventArgs> HitMove;
-	public event EventHandler<EventArgs> SwitchLaneMove;
+	public event EventHandler HitMove;
+	public event EventHandler SwitchLaneMove;
 
 	public GameObject[] EnemyPrefabs;
 	public GameObject VikingPrefab;
@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         _viking = vikingGo.GetComponent<Viking>();
 		_viking.laneOffset = LaneOffset;
         _vikingAnimator = _viking.GetComponentInChildren<Animator>();
+        _viking.HitCollider.enabled = false;
 
         _attackHandler = new InputHandler("Fire1", i => _attackTriggered = true, true);
         _spinHandler = new InputHandler("Fire2", i => _spinTriggered = true, true);
@@ -92,10 +93,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-		if(gameover && Time.time - gameoverTime > 5f)
-			SceneManager.LoadScene ("main");
-
-        ResetState();
+		ResetState();
 
         foreach (var enemy in _enemies)
         {
@@ -150,23 +148,21 @@ public class GameManager : MonoBehaviour
 			var secondEnemy = _enemies[i+1];
 			if (_spinTriggered && EnemiesCanBeSpinHit(nextEnemy, secondEnemy))
 			{
-				RemoveEnemy(nextEnemy, true);
+                _vikingAnimator.SetTrigger("SpinAttack");
+                RemoveEnemy(nextEnemy, true);
 				RemoveEnemy(secondEnemy, true);
 			}
 		}
-
-        
 	}
 
 	private void GameOver()
 	{
 		Destroy(_viking.gameObject);
-        //Destroy(this.gameObject);
 		Instantiate(BloodExplosion, _viking.transform.position, _viking.transform.rotation);
-		gameoverTime = Time.time;
-		gameover = true;
-		SceneManager.LoadScene ("gameover",LoadSceneMode.Additive);
-	}
+        SceneManager.LoadScene ("gameover",LoadSceneMode.Additive);
+
+        Destroy(gameObject);
+    }
 
     private void ResetState()
     {
@@ -201,6 +197,11 @@ public class GameManager : MonoBehaviour
 
     private bool EnemyHitViking(Enemy enemy)
     {
+        if (!_viking.HitCollider.enabled && Time.time > 1)
+        {
+            _viking.HitCollider.enabled = true;
+        }
+
         var enemyCollider = enemy.GetComponent<BoxCollider2D>();
 
         return _viking.HitCollider.IsTouching(enemyCollider);
